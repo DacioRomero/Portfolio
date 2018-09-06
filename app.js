@@ -1,10 +1,8 @@
-var Express = require('express');
-var ExHbs   = require('express-handlebars');
+// app.js
 
-var app = Express();
-app.engine('handlebars', ExHbs({ defaultLayout: 'main' }));
+const app = require('express')();
+app.engine('handlebars', require('express-handlebars')({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-app.set('port', 3000)
 
 app.get('/', (req, res) => {
     res.render('home');
@@ -12,6 +10,7 @@ app.get('/', (req, res) => {
 
 if (require.main === module) {
     let port = process.env.PORT || 3000;
+    
     app.listen(port, () => {
         console.log(`App listening on port ${port}!`);
     });
