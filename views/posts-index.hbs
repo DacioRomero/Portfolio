@@ -1,0 +1,14 @@
+<!-- views/home.hbs -->
+
+<header class="clearfix">
+    <h1 class="float-left">Blog</h1>
+    <a href="/posts/new" class="btn btn-primary float-right">New Post</a>
+</header>
+
+<div>
+    {{#each posts}}
+        <h2><a href="/posts/{{this._id}}">{{this.title}}</a></h2>
+        {{{ shorten (mdToHTML this.content) 10 }}}
+        <p>...</p>
+    {{/each}}
+</div>
