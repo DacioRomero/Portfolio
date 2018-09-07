@@ -6,30 +6,28 @@ const methodOverride = require('method-override')
 const mongoose       = require('mongoose');
 const bodyParser     = require('body-parser');
 const marked         = require('marked');
+const path           = require('path');
 
 const app = express();
 
 const PostsController = require('./controllers/posts')
 
 // Middleware
-// hbs = exphbs.create({
-//     defaultLayout: 'main',
-//     extname: '.hbs',
-//     helpers: {
-//         mdToHTML: function (md) { marked(md); },
-//         shorten: function (s, n) { return s.slice(n)  }
-//     }
-// });
 app.engine('hbs', exphbs({
-    defaultLayout: 'main',
     extname: '.hbs',
+    layoutsDir: path.join(__dirname, '/views/layouts/'),
+    partialsDir: path.join(__dirname, '/views/partials/'),
+    defaultLayout: 'main',
     helpers: {
         mdToHTML: marked,
         shorten: (s, n) => { return s.split('\n').slice(0, n).join('\n'); },
-        ifOut: (x, y, a, b) => { return x == y ? a : b }
+        ifOut: (x, y, a, b) => { return x == y ? a : b; }
     }
 }));
+
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'hbs');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
@@ -44,10 +42,6 @@ app.get('/about', (req, res) => {
 });
 
 PostsController(app)
-
-// app.get('/test', (req, res) => {
-//     res.render('post', { content: '*test*' } );
-// });
 
 if (require.main === module) {
     let port = process.env.PORT || 3000;
