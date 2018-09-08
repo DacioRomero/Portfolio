@@ -1,18 +1,19 @@
-// app.js
+#!/usr/bin/env node
 
-const express        = require('express');
-const exphbs         = require('express-handlebars');
-const methodOverride = require('method-override')
-const mongoose       = require('mongoose');
-const bodyParser     = require('body-parser');
-const marked         = require('marked');
-const path           = require('path');
-
-const app = express();
-
+// DEPENDENCIES
+const express         = require('express');
+const exphbs          = require('express-handlebars');
+const methodOverride  = require('method-override')
+const mongoose        = require('mongoose');
+const bodyParser      = require('body-parser');
+const marked          = require('marked');
+const path            = require('path');
 const PostsController = require('./controllers/posts')
 
+
 // Middleware
+const app = express();
+
 app.engine('hbs', exphbs({
     extname: '.hbs',
     layoutsDir: path.join(__dirname, '/views/layouts/'),
@@ -31,8 +32,10 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+// DATABASE
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dacio-app', { useNewUrlParser: true });
 
+// ROUTES
 app.get('/', (req, res) => {
     res.render('index', { active: 'home' });
 });
@@ -43,6 +46,7 @@ app.get('/about', (req, res) => {
 
 PostsController(app)
 
+// LISTENER - only if directly run
 if (require.main === module) {
     let port = process.env.PORT || 3000;
 
@@ -51,4 +55,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = app
+module.exports = app;
