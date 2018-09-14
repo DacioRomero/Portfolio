@@ -8,8 +8,6 @@ const mongoose        = require('mongoose');
 const bodyParser      = require('body-parser');
 const marked          = require('marked');
 const path            = require('path');
-const PostsController = require('./controllers/posts')
-
 
 // Middleware
 const app = express();
@@ -21,7 +19,7 @@ app.engine('hbs', exphbs({
     defaultLayout: 'main',
     helpers: {
         mdToHTML: marked,
-        shorten: (s, n) => { return s.split('\n').slice(0, n).join('\n'); },
+        shorten: (s, n) => { return s.slice(0, n); },
         ifOut: (x, y, a, b) => { return x == y ? a : b; }
     }
 }));
@@ -36,15 +34,11 @@ app.use(methodOverride('_method'));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dacio-app', { useNewUrlParser: true });
 
 // ROUTES
-app.get('/', (req, res) => {
-    res.render('index', { active: 'home' });
-});
+const indexController = require('./controllers/index');
+const postsController = require('./controllers/posts');
 
-app.get('/about', (req, res) => {
-    res.render('about', { active: 'about' });
-});
-
-PostsController(app)
+indexController(app)
+postsController(app)
 
 // LISTENER - only if directly run
 if (require.main === module) {
