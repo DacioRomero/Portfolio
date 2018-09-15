@@ -1,12 +1,12 @@
 <!-- views/repos.hbs -->
 <a href="https://github.com/DacioRomero?tab=repositories"><h1>GitHub Repositories</h1></a>
 <div class="row">
-{{#each repos}}
+    {{#each repos}}
     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
         <a href={{this.html_url}}><h2>{{sReplace this.name '-' ' '}}</h2></a>
         <p>{{#if this.description}}{{this.description}}<br/>{{/if}}
-        {{#if this.language}}Written in {{this.language}}<br/>{{/if}}
-        {{#if this.license}}Licensed under {{this.license.name}}{{/if}}</p>
+           {{#if this.language}}Written in {{this.language}}<br/>{{/if}}
+           {{#if this.license}}Licensed under {{this.license.name}}{{/if}}</p>
     </div>
-{{/each}}
+    {{/each}}
 </div>

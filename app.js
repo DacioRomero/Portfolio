@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 // DEPENDENCIES
 const express         = require('express');
 const exphbs          = require('express-handlebars');
@@ -8,8 +6,6 @@ const mongoose        = require('mongoose');
 const bodyParser      = require('body-parser');
 const marked          = require('marked');
 const path            = require('path');
-const PostsController = require('./controllers/posts')
-
 
 // MIDDLEWARE
 const app = express();
@@ -26,9 +22,6 @@ app.engine('hbs', exphbs({
         sReplace: (str, s, n) => {
             return str.replace(s, n);
         },
-        noop: options => {
-            return options.fn(this);
-        }
     }
 }));
 
@@ -43,17 +36,13 @@ app.use(express.static('public'));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dacio-app', { useNewUrlParser: true });
 
 // ROUTES
-app.get('/', (req, res) => {
-    res.render('index', { active: 'home' });
-});
+const indexController = require('./controllers/index');
+const postsController = require('./controllers/posts');
 
-app.get('/about', (req, res) => {
-    res.render('about', { active: 'about' });
-});
+indexController(app);
+postsController(app);
 
-PostsController(app)
-
-// LISTENER - only if directly run
+// LISTENER
 if (require.main === module) {
     let port = process.env.PORT || 3000;
 
