@@ -1,21 +1,20 @@
 // controllers/posts.js
-
 const Post = require('../models/post')
 
 function PostsController(app) {
 
     app.get('/posts', (req, res) => {
         Post.find()
-            .then(posts => {
-                res.render('posts-index', { posts: posts, active: 'blog' });
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
+        .then(posts => {
+            res.render('posts-index', { posts: posts, active: 'blog' });
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
     });
 
     app.get('/posts/new', (req, res) => {
-      res.render('posts-new');
+        res.render('posts-new');
     });
 
     // CREATE
@@ -48,23 +47,23 @@ function PostsController(app) {
     // UPDATE
     app.put('/posts/:id', (req, res) => {
         Post.findByIdAndUpdate(req.params.id, req.body)
-            .then(review => {
-                res.redirect(`/posts/${review._id}`);
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
+        .then(review => {
+            res.redirect(`/posts/${review._id}`);
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
     });
 
     // DELETE
     app.delete('/posts/:id', (req, res) => {
         Post.findByIdAndRemove(req.params.id)
-            .then(review => {
-                res.redirect('/posts');
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
+        .then(review => {
+            res.redirect('/posts');
+        })
+        .catch(err => {
+            console.log(err.message);
+        })
     });
 
 }
