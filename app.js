@@ -11,7 +11,7 @@ const path            = require('path');
 const PostsController = require('./controllers/posts')
 
 
-// Middleware
+// MIDDLEWARE
 const app = express();
 
 app.engine('hbs', exphbs({
@@ -21,8 +21,19 @@ app.engine('hbs', exphbs({
     defaultLayout: 'main',
     helpers: {
         mdToHTML: marked,
+<<<<<<< Updated upstream
         shorten: (s, n) => { return s.split('\n').slice(0, n).join('\n'); },
         ifOut: (x, y, a, b) => { return x == y ? a : b; }
+=======
+        shorten: (s, n) => { return s.slice(0, n); },
+        ifOut: (x, y, a, b) => { return x == y ? a : b; },
+        sReplace: (str, s, n) => {
+            return str.replace(s, n);
+        },
+        noop: options => {
+            return options.fn(this);
+        }
+>>>>>>> Stashed changes
     }
 }));
 
@@ -31,6 +42,7 @@ app.set('view engine', 'hbs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
 
 // DATABASE
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dacio-app', { useNewUrlParser: true });

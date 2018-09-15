@@ -1,5 +1,4 @@
 // controllers/posts.js
-
 const Post = require('../models/post')
 
 function PostsController(app) {

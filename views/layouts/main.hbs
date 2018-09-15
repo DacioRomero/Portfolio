@@ -1,5 +1,4 @@
 <!-- views/layouts/main.handlebars -->
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,23 +24,16 @@
               line-height: 60px; /* Vertically center the text there */
               background-color: #f5f5f5;
             }
-
-
-            /* Custom page CSS
-            -------------------------------------------------- */
-            /* Not required for template or sticky footer method. */
-
-            .container {
-              width: auto;
-              max-width: 680px;
-              padding: 0 15px;
+            [class*="fa-"]:hover {
+                text-decoration: none;
+                color: grey;
             }
         </style>
     </head>
     <body>
         {{> nav}}
 
-        <div role="main" class="container mt-4">
+        <div role="main" class="container">
             {{{body}}}
         </div>
 
