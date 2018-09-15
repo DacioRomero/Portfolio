@@ -5,8 +5,8 @@
 </header>
 <div>
     {{#each posts}}
-        <h2><a href="/posts/{{this._id}}">{{this.title}}</a></h2>
-        {{{ shorten (mdToHTML this.content) 100 }}}
-        <p>...</p>
+    <h2><a href="/posts/{{this._id}}">{{this.title}}</a></h2>
+    {{{shorten (mdToHTML this.content) 100}}}
+    <p>...</p>
     {{/each}}
 </div>
