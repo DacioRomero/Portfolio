@@ -21,10 +21,6 @@ app.engine('hbs', exphbs({
     defaultLayout: 'main',
     helpers: {
         mdToHTML: marked,
-<<<<<<< Updated upstream
-        shorten: (s, n) => { return s.split('\n').slice(0, n).join('\n'); },
-        ifOut: (x, y, a, b) => { return x == y ? a : b; }
-=======
         shorten: (s, n) => { return s.slice(0, n); },
         ifOut: (x, y, a, b) => { return x == y ? a : b; },
         sReplace: (str, s, n) => {
@@ -33,7 +29,6 @@ app.engine('hbs', exphbs({
         noop: options => {
             return options.fn(this);
         }
->>>>>>> Stashed changes
     }
 }));
 
