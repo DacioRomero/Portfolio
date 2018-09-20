@@ -33,14 +33,14 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
 // DATABASE
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/dacio-app', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/portfolio', { useNewUrlParser: true });
 
 // ROUTES
 const indexController = require('./controllers/index');
-const postsController = require('./controllers/posts');
+// const postsController = require('./controllers/posts');
 
 indexController(app);
-postsController(app);
+// postsController(app);
 
 // LISTENER
 if (require.main === module) {
