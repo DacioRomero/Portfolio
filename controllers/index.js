@@ -14,7 +14,16 @@ function indexController(app) {
         octokit.repos.getForUser({ username: 'DacioRomero' })
         .then(response => {
             let sortedRepos = response.data.sort((a, b) => {
-                return b['stargazers_count'] - a['stargazers_count'];
+                dateA = Date.parse(a['updated_at']);
+                dateB = Date.parse(b['updated_at']);
+
+                if (dateA > dateB) {
+                    return -1
+                } else if (dateA < dateB) {
+                    return 1
+                } else {
+                    return 0
+                }
             });
 
             res.render('repos', { repos: sortedRepos, active: 'repos' });
