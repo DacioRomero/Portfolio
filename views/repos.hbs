@@ -6,7 +6,7 @@
         <div class="card h-100">
             <div class="card-body mb-0">
                 <a href={{this.html_url}}><h2 class="card-title">{{sReplace this.name '-' ' '}}</h2></a>
-                <h6 class="card-subtitle text-muted">Last updated <time class="lastupdated" datetime="{{this.updated_at}}"></time></h6>
+                <h6 class="card-subtitle text-muted">Last updated <span class="lastupdated" datetime="{{this.updated_at}}"></span></h6>
                 <p class="card-text">{{#if this.description}}{{this.description}}</br>{{/if}}
                     {{#if this.language}}Written in {{this.language}}<br/>{{/if}}
                     {{#if this.license}}Licensed under {{this.license.name}}{{/if}}</p>

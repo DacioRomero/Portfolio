@@ -7,6 +7,8 @@ const bodyParser      = require('body-parser');
 const marked          = require('marked');
 const path            = require('path');
 
+require('dotenv').config();
+
 // MIDDLEWARE
 const app = express();
 
