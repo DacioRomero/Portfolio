@@ -1,5 +1,5 @@
 <!-- views/partials/nav.hbs -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<header class="navbar navbar-expand-sm navbar-dark bg-primary">
     <a class="navbar-brand" href="/">Dacio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,18 +7,18 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ifOut active "home" "active" ""}}">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item {{#is active "home"}}active{{/is}}">
+                <a class="nav-link" href="/">Home{{#is active "home"}} <span class="sr-only">(current)</span>{{/is}}</a>
             </li>
-            <li class="nav-item {{ifOut active "about" "active" ""}}">
-                <a class="nav-link" href="/about">About</a>
+            <li class="nav-item {{#is active "about"}}active{{/is}}">
+                <a class="nav-link" href="/about">About{{#is active "about"}} <span class="sr-only">(current)</span>{{/is}}</a>
             </li>
-            <!-- <li class="nav-item {{ifOut active "blog" "active" ""}}">
-                <a class="nav-link" href="/posts">Blog</a>
+            <!-- <li class="nav-item {{#is active "blog"}}active{{/is}}">
+                <a class="nav-link" href="/posts">Blog{{#is active "blog"}} <span class="sr-only">(current)</span>{{/is}}</a>
             </li> -->
-            <li class="nav-item {{ifOut active "repos" "active" ""}}">
-                <a class="nav-link" href="/repos">Repositories</a>
+            <li class="nav-item {{#is active "repos"}}active{{/is}}">
+                <a class="nav-link" href="/repos">Repositories{{#is active "repos"}} <span class="sr-only">(current)</span>{{/is}}</a>
             </li>
         </ul>
     </div>
-</nav>
+</header>

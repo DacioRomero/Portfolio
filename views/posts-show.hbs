@@ -1,7 +1,9 @@
 <!-- views/posts-show.hbs -->
 <a href="/posts">Back</a>
 <h2>{{post.title}}</h2>
-<p>{{{mdToHTML post.content}}}</p>
+<div>
+    {{#markdown}}{{post.content}}{{/markdown}}
+</div>
 <a href="/posts/{{post._id}}/edit">Edit</a>
 <form method="POST" action="/posts/{{post._id}}?_method=DELETE">
     <button class="btn btn-primary" type="submit">Delete</button>

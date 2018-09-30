@@ -1,12 +1,19 @@
 <!-- views/home.hbs -->
-<header class="clearfix">
-    <h1 class="float-left">Blog</h1>
-    <a href="/posts/new" class="btn btn-primary float-right">New Post</a>
-</header>
-<div>
+<div class="row">
+    <div class="col-6">
+        <h1>Blog</h1>
+    </div>
+    <div class="col-6 text-right my-auto">
+        <a href="/posts/new" class="btn btn-primary">New Post</a>
+    </div>
     {{#each posts}}
-    <h2><a href="/posts/{{this._id}}">{{this.title}}</a></h2>
-    {{{shorten (mdToHTML this.content) 100}}}
-    <p>...</p>
+    <div class="col-md-6 col-xl-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title"><a href="/posts/{{this._id}}">{{this.title}}</a></h2>
+                {{{ellipsis (markdown this.content) 128}}}
+            </div>
+        </div>
+    </div>
     {{/each}}
 </div>

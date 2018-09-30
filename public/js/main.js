@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function lastupdatedUpdate() {
-    $('.lastupdated').each(function () {
+    $('time.lastupdated').each(function () {
         date = moment($(this).attr('datetime'));
         $(this).html(date.fromNow());
     })
