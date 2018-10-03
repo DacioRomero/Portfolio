@@ -12,7 +12,8 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 const app = express();
 
 const myHelpers = {
-    shorten: (s, n) => { return s.slice(0, n); }
+    shorten: (s, n) => { return s.slice(0, n); },
+    fromNow: date => { return require(path.join(__dirname, '/public/js/moment.min.js'))(date).fromNow() }
 }
 
 app.engine('hbs', exphbs({
@@ -20,7 +21,7 @@ app.engine('hbs', exphbs({
     layoutsDir: path.join(__dirname, '/views/layouts/'),
     partialsDir: path.join(__dirname, '/views/partials/'),
     defaultLayout: 'main',
-    helpers: Object.assign(myHelpers, require('handlebars-helpers')(['string', 'comparison', 'markdown'])),
+    helpers: Object.assign(myHelpers, require('handlebars-helpers')(['string', 'comparison', 'markdown', 'date']),),
 }));
 
 app.set('views', path.join(__dirname, '/views'));
@@ -28,7 +29,7 @@ app.set('view engine', 'hbs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // DATABASE
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/portfolio', { useNewUrlParser: true });
