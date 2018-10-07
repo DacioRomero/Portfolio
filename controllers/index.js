@@ -1,6 +1,14 @@
 // contollers/index.js
 const octokit = require('@octokit/rest')();
 
+if(process.env.GITHUB_ID && process.env.GITHUB_SECRET) {
+    octokit.authenticate({
+        type: 'oauth',
+        key: process.env.GITHUB_ID,
+        secret: process.env.GITHUB_SECRET
+    })
+}
+
 function indexController(app) {
     app.get('/', (req, res) => {
         res.render('home', { active: 'home' });
